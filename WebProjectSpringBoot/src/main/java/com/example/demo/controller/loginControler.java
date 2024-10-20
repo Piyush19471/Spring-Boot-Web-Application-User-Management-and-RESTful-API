@@ -1,0 +1,40 @@
+package com.example.demo.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import com.example.demo.User;
+import com.example.demo.service.UserService;
+@Controller
+public class loginControler {
+
+	@Autowired
+	private UserService userService;
+	
+	 @GetMapping("/logPage")
+	 public String openLogPage(Model model) {
+		 model.addAttribute("user", new User());
+		 return "login";
+	 }
+	 @SuppressWarnings("null")
+	@PostMapping("/logForm")
+	 public String SubmitlogForm(@ModelAttribute ("user") User user , Model model) {
+		 
+		User validUser= userService.loginUser(user.getEmail(), user.getPassword());
+		 if(validUser!=null) {
+			 model.addAttribute("name", validUser.getName());
+			 model.addAttribute("email", validUser.getEmail());
+			 return "profile";
+		 }	 
+		 
+		 else {
+			 
+			 model.addAttribute("errorMsg", "Email id or Password incorrect 😒🤦‍♂️");
+			 return "login";
+		 }
+		  
+	 }
+	 
+}
