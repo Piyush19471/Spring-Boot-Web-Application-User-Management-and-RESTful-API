@@ -58,7 +58,7 @@ public class Mycontroller {
    if(session!=null) {
 	   session.invalidate();
    }
- 	return "redirect:logPage";
+ 	return "redirect:/";
  	
  	
  }

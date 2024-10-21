@@ -13,10 +13,10 @@ public class loginControler {
 	@Autowired
 	private UserService userService;
 	
-	 @GetMapping("/logPage")
+	 @GetMapping("/")
 	 public String openLogPage(Model model) {
 		 model.addAttribute("user", new User());
-		 return "login";
+		 return "index";
 	 }
 	 @SuppressWarnings("null")
 	@PostMapping("/logForm")
@@ -32,7 +32,7 @@ public class loginControler {
 		 else {
 			 
 			 model.addAttribute("errorMsg", "Email id or Password incorrect 😒🤦‍♂️");
-			 return "login";
+			 return "index";
 		 }
 		  
 	 }
